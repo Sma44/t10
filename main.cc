@@ -13,7 +13,8 @@ int main()
   Student *joe     = new Student("100777888", "Joe", "Physics", 8.3f);
   Student *timmy   = new Student("100333444", "Timmy", "CS", 11.5f);
   Student *amy     = new Student("100123444", "Amy", "Math", 10.8f);
-
+  Student *amy2     = new Student("100123445", "Amy2", "Math", 10.8f);
+  Student *amy3     = new Student("100123446", "Amy3", "Math", 10.6f);
   List<Student> comp2404;
 
   comp2404.add(matilda);
@@ -21,6 +22,14 @@ int main()
   comp2404.add(joe);
   comp2404.add(timmy);
   comp2404.add(amy);
+
+  cout << endl << "STUDENTS:" << endl;
+  comp2404.print();
+  cout << endl;
+
+  cout << endl << "STUDENTS after addfront and back:" << endl;
+  comp2404.addFront(amy3);
+  comp2404.addFront(amy2);
 
   cout << endl << "STUDENTS:" << endl;
   comp2404.print();
