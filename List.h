@@ -11,10 +11,7 @@ class List
     public:
       T* data;
       Node* next;
-      Node* prev; // added for doubly linked list
-
-      // Constructor initializing prev to nullptr
-      Node() : data(nullptr), next(nullptr), prev(nullptr) { }
+      Node* prev; 
   };
 
   public:
@@ -23,14 +20,16 @@ class List
     void add(T*);
     void del(std::string, T**);
     void print() const;
+    void addFront(T*);
+    void addBack(T*);
 
   private:
     Node* head;
-    Node* tail; // added for doubly linked list
+    Node* tail; 
 };
 
 template<class T>
-List<T>::List() : head(nullptr), tail(nullptr) { } // initialize tail
+List<T>::List() : head(nullptr), tail(nullptr) { } 
 
 template<class T>
 List<T>::~List()
@@ -63,19 +62,18 @@ void List<T>::del(std::string n, T** stu)
     return;
   }
 
-  // Update the links of the surrounding nodes
   if (currNode->prev != nullptr) {
     currNode->prev->next = currNode->next;
   }
   else {
-    head = currNode->next; // Update head if necessary
+    head = currNode->next; 
   }
   
   if (currNode->next != nullptr) {
     currNode->next->prev = currNode->prev;
   }
   else {
-    tail = currNode->prev; // Update tail if necessary
+    tail = currNode->prev; 
   }
 
   *stu = currNode->data;
@@ -103,14 +101,14 @@ void List<T>::add(T* stu)
     currNode->prev = newNode;
   }
   else {
-    tail = newNode; // New node is now the last node
+    tail = newNode; 
   }
   
   if (prevNode != nullptr) {
     prevNode->next = newNode;
   }
   else {
-    head = newNode; // New node is now the first node
+    head = newNode;
   }
 }
 
@@ -119,14 +117,12 @@ void List<T>::print() const
 {
   Node* currNode = head;
 
-  // Forward direction
   std::cout << "Forward:" << std::endl;
   while (currNode != nullptr) {
     currNode->data->print();
     currNode = currNode->next;
   }
 
-  // Backward direction
   currNode = tail;
   std::cout << "Backward:" << std::endl;
   while (currNode != nullptr) {
@@ -134,5 +130,37 @@ void List<T>::print() const
     currNode = currNode->prev;
   }
 }
+
+template<class T>
+void List<T>::addFront(T* stu){
+    Node* newNode = new Node;
+    newNode->data = stu;
+    newNode->next = head;
+    newNode->prev = nullptr;
+    if (head != nullptr) {
+        head->prev = newNode;
+    } else {
+        tail = newNode;
+    }
+
+    head = newNode; 
+}
+
+template<class T>
+void List<T>::addBack(T* stu){
+    Node* newNode = new Node;
+    newNode->data = stu;
+    newNode->next = nullptr; 
+    if (tail != nullptr) {
+        tail->next = newNode;
+        newNode->prev = tail;
+    } else {
+        head = newNode;
+    }
+
+    tail = newNode; 
+}
+
+
 
 #endif
