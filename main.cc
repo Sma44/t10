@@ -29,7 +29,7 @@ int main()
 
   cout << endl << "STUDENTS after addfront and back:" << endl;
   comp2404.addFront(amy3);
-  comp2404.addFront(amy2);
+  comp2404.addBack(amy2);
 
   cout << endl << "STUDENTS:" << endl;
   comp2404.print();
